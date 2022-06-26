@@ -3,25 +3,30 @@ import React from "react";
 import NavBar from "./components/NavBar";
 import Pokedex from "./components/Pokedex";
 import SearchBar from "./components/SearchBar";
-import { getPokemons } from "./api";
+import { getPokemonData, getPokemons } from "./api";
 
 const { useState, useEffect } = React;
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
 
-  const fetchPokemons = async() =>{
+  const fetchPokemons = async () => {
     try {
-      const data =await getPokemons();
-      setPokemons(data.results);
-    } catch (error) {
-      console.log(error)
-    }
-  }
+      const data = await getPokemons();
+      
+      const promises = data.results.map(async (pokemon) => {
+        return await getPokemonData(pokemon.url);
+      });
 
+      const results = await Promise.all(promises);
+      setPokemons(results);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    fetchPokemons()
+    fetchPokemons();
   }, []);
 
   return (
@@ -29,7 +34,7 @@ function App() {
       <NavBar />
       <div className="App">
         <SearchBar />
-        <Pokedex pokemons={pokemons}/>
+        <Pokedex pokemons={pokemons} />
       </div>
     </div>
   );
