@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+nav {
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.navbar-image {
+  width: 160px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
