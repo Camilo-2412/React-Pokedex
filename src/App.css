@@ -113,6 +113,12 @@ nav {
   align-items: center;
 }
 
+.pagination{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
