@@ -3,7 +3,7 @@ import Pokemon from "../components/Pokemon";
 import Pagination from "../components/Pagination";
 
 const Pokedex = (props) => {
-  const { pokemons, page, setPage, total, loading } = props;
+  const { pokemons, page, setPage, total, loading, state, setState } = props;
 
   const lastPage = () => {
     const nextPage = Math.max(page - 1, 0);
@@ -13,6 +13,10 @@ const Pokedex = (props) => {
   const nextPage = () => {
     const nextPage = Math.min(page + 1, total);
     setPage(nextPage);
+  };
+
+  const openModal = () => {
+    setState(!state)
   };
 
   return (
@@ -32,7 +36,15 @@ const Pokedex = (props) => {
       ) : (
         <div className="pokedex-grid">
           {pokemons.map((pokemon, idx) => {
-            return <Pokemon pokemon={pokemon} key={pokemon.name} />;
+            return (
+              <Pokemon
+                pokemon={pokemon}
+                state={state}
+                setState={setState}
+                key={pokemon.name}
+                modal = {openModal}
+              />
+            );
           })}
         </div>
       )}

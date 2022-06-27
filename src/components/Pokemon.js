@@ -1,11 +1,18 @@
 import React from "react";
+import ModalGeneric from "../components/Modal";
 
 const Pokemon = (props) => {
-  const {pokemon} = props;
+  const { pokemon, setState, state, modal } = props;
   return (
     <div className="pokemon-card">
+{/*       <ModalGeneric
+        pokemon={pokemon}
+        setState={setState}
+        state={state}
+        modal={modal}
+      /> */}
       <div className="pokemon-img-container">
-        <img src={pokemon.sprites.front_default} alt={pokemon.name}/>
+        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
       </div>
 
       <div className="card-body">
@@ -17,7 +24,12 @@ const Pokemon = (props) => {
         <div className="card-bottom">
           <div className="pokemon-type">
             {pokemon.types.map((type, idx) => {
-              return <div key={idx} className="pokemon-type-text"> {type.type.name}</div>;
+              return (
+                <div key={idx} className="pokemon-type-text">
+                  {" "}
+                  {type.type.name}
+                </div>
+              );
             })}
           </div>
         </div>
